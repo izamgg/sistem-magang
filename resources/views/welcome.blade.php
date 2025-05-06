@@ -175,11 +175,11 @@ https://templatemo.com/tm-575-leadership-event
                             <h4>Dengan sistem yang inovatif, kami menyediakan peluang magang yang terintegrasi dengan teknologi terkini, membantu kamu mempersiapkan diri menjadi profesional yang kompeten di era digital.</h4>
 
                             <div class="avatar-group border-top py-5 mt-5">
-                                <img src="/images/avatar/1.jpg" class="img-fluid avatar-image" alt="">
+                                <img src="/images/avatar/10.jpg" class="img-fluid avatar-image" alt="">
 
                                 <img src="/images/avatar/2.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
 
-                                <img src="/images/avatar/3.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
+                                <img src="/images/avatar/11.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
 
                                 <img src="/images/avatar/4.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
 
@@ -206,13 +206,13 @@ https://templatemo.com/tm-575-leadership-event
 
                         <div class="col-lg-6 col-12">
                             <div class="speakers-thumb">
-                                <img src="/images/avatar/1.jpg" class="img-fluid speakers-image" alt="">
+                                <img src="/images/avatar/10.jpg" class="img-fluid speakers-image" alt="">
 
-                                <small class="speakers-featured-text">CAPTEN</small>
+                                <small class="speakers-featured-text">KETUA</small>
 
                                 <div class="speakers-info">
 
-                                    <h5 class="speakers-title mb-0">NOPAL </h5>
+                                    <h5 class="speakers-title mb-0">IZHAM </h5>
 
                                     <p class="speakers-text mb-0">Orang</p>
 
@@ -234,7 +234,7 @@ https://templatemo.com/tm-575-leadership-event
                                         <img src="/images/avatar/2.jpg" class="img-fluid speakers-image" alt="">
 
                                         <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">FARIQ</h5>
+                                            <h5 class="speakers-title mb-0">Echa</h5>
 
                                             <p class="speakers-text mb-0">TANK</p>
 

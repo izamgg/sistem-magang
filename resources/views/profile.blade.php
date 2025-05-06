@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="form-group">
-                  <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+                  <a href="/profile/edit" class="btn btn-primary">Edit Profil</a>
                 </div>
               </div>
             </div>
