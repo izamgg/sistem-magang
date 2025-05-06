@@ -214,7 +214,7 @@ https://templatemo.com/tm-575-leadership-event
 
                                     <h5 class="speakers-title mb-0">IZHAM </h5>
 
-                                    <p class="speakers-text mb-0">Orang</p>
+                                    <p class="speakers-text mb-0">Gold Lane</p>
 
                                     <ul class="social-icon">
                                         <li><a href="#" class="social-icon-link bi-facebook"></a></li>
