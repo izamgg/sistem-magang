@@ -177,11 +177,11 @@ https://templatemo.com/tm-575-leadership-event
                             <div class="avatar-group border-top py-5 mt-5">
                                 <img src="/images/avatar/10.jpg" class="img-fluid avatar-image" alt="">
 
-                                <img src="/images/avatar/2.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
+                                <img src="/images/avatar/eca.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
 
                                 <img src="/images/avatar/11.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
 
-                                <img src="/images/avatar/4.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
+                                <img src="/images/avatar/ari.jpg" class="img-fluid avatar-image avatar-image-left" alt="">
 
                                 <p class="d-inline">120+ Orang sudah bergabung bersama kami!</p>
                             </div>
@@ -231,7 +231,7 @@ https://templatemo.com/tm-575-leadership-event
                             <div class="row">
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="/images/avatar/2.jpg" class="img-fluid speakers-image" alt="">
+                                        <img src="/images/avatar/eca.jpg" class="img-fluid speakers-image" alt="">
 
                                         <div class="speakers-info">
                                             <h5 class="speakers-title mb-0">Echa</h5>
@@ -249,7 +249,7 @@ https://templatemo.com/tm-575-leadership-event
 
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="/images/avatar/3.jpg" class="img-fluid speakers-image" alt="">
+                                        <img src="/images/avatar/11.jpg" class="img-fluid speakers-image" alt="">
 
                                         <div class="speakers-info">
                                             <h5 class="speakers-title mb-0">Zubil </h5>
@@ -267,7 +267,7 @@ https://templatemo.com/tm-575-leadership-event
 
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="/images/avatar/4.jpg" class="img-fluid speakers-image" alt="">
+                                        <img src="/images/avatar/ari.jpg" class="img-fluid speakers-image" alt="">
 
                                         <div class="speakers-info">
                                             <h5 class="speakers-title mb-0">Ari</h5>
