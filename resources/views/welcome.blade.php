@@ -259,9 +259,9 @@ https://templatemo.com/tm-575-leadership-event
                                             <p class="speakers-text mb-0">MAGE</p>
 
                                             <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                                                <li><a href="https://www.instagram.com/tmsrbill_" class="social-icon-link bi-instagram"></a></li>
 
-                                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                                                <li><a href="https://wa.me/+6283114749373" class="social-icon-link bi-whatsapp"></a></li>
                                             </ul>
                                         </div>
                                     </div>
