@@ -61,7 +61,7 @@
 
 
                 <div class="mb-3">
-                  <label class="fw-bold d-block">Status</label>
+                  <label class="fw-bold d-block">Status Sidang</label>
                   <span class="badge 
                       {{ $statusKelulusan == 'Lulus' ? 'bg-success' : '' }}
                       {{ $statusKelulusan == 'Tidak Lulus' ? 'bg-danger' : '' }}">
@@ -138,7 +138,7 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-body">
-                <h2 class="mb-4 text-center fw-bold">Penilaian</h2>
+                <h2 class="mb-4 text-center fw-bold">Penilaian Sidang</h2>
                 <form action="{{ route('update_nilai', ['id' => $dataMhs->id]) }}" method="POST">
                   @php
                     // Cek apakah user sudah memberikan nilai sebelumnya

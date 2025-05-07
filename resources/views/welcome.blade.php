@@ -217,11 +217,11 @@ https://templatemo.com/tm-575-leadership-event
                                     <p class="speakers-text mb-0">Gold Lane</p>
 
                                     <ul class="social-icon">
-                                        <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+                                        <li><a href="https://www.tiktok.com/@baksoultramilk?_t=ZS-8w9Dc61jWB0&_r=1" class="social-icon-link bi-tiktok"></a></li>
 
-                                        <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                                        <li><a href="https://www.instagram.com/izhammm_" class="social-icon-link bi-instagram"></a></li>
 
-                                        <li><a href="#" class="social-icon-link bi-google"></a></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -239,9 +239,11 @@ https://templatemo.com/tm-575-leadership-event
                                             <p class="speakers-text mb-0">Support</p>
 
                                             <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-facebook"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                                                <li><a href="https://www.tiktok.com/@echarzz?_t=ZS-8w9EohWC4sa&_r=1" class="social-icon-link bi-tiktok"></a></li>
+        
+                                                <li><a href="https://www.instagram.com/echaarrz_?igsh=MXFwNnJlbWl2NmVseA==" class="social-icon-link bi-instagram"></a></li>
+        
+                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -284,7 +286,6 @@ https://templatemo.com/tm-575-leadership-event
                                         </div>
                                     </div>
                                 </div>
-
 
                             </div>
                         </div>
@@ -352,7 +353,7 @@ https://templatemo.com/tm-575-leadership-event
                         </div>
                     </div>
 
-                    <div class="col-lg-7 col-12">
+                    {{-- <div class="col-lg-7 col-12">
                         <ul class="footer-menu d-flex flex-wrap">
                             <li class="footer-menu-item"><a href="#" class="footer-menu-link">Our Story</a></li>
 
@@ -362,7 +363,7 @@ https://templatemo.com/tm-575-leadership-event
 
                             <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
 
 
                     <div class="col-lg-5 col-12 ms-lg-auto">
