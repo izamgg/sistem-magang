@@ -11,9 +11,9 @@
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        
+
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        
+
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link href="css/templatemo-leadership-event.css" rel="stylesheet">
-        
+
 <!--
 
 TemplateMo 575 Leadership Event
@@ -30,7 +30,7 @@ https://templatemo.com/tm-575-leadership-event
 
 -->
     </head>
-    
+
     <body>
 
         <nav class="navbar navbar-expand-lg">
@@ -61,7 +61,7 @@ https://templatemo.com/tm-575-leadership-event
                             <a class="nav-link click-scroll" href="#section_3">Member</a>
                         </li>
 
-                      
+
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_7">Contact</a>
                         </li>
@@ -71,7 +71,7 @@ https://templatemo.com/tm-575-leadership-event
                         </li>
                     </ul>
                 <div>
-                        
+
             </div>
         </nav>
 
@@ -168,7 +168,7 @@ https://templatemo.com/tm-575-leadership-event
 
                             <a class="custom-btn custom-border-btn btn custom-link mt-3 me-3" href="#section_3">Show Member</a>
 
-                          
+
                         </div>
 
                         <div class="col-lg-6 col-12 mt-5 mt-lg-0">
@@ -252,7 +252,7 @@ https://templatemo.com/tm-575-leadership-event
                                         <img src="/images/avatar/3.jpg" class="img-fluid speakers-image" alt="">
 
                                         <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">TAKDIR</h5>
+                                            <h5 class="speakers-title mb-0">Zubil </h5>
 
                                             <p class="speakers-text mb-0">MAGE</p>
 
@@ -285,57 +285,7 @@ https://templatemo.com/tm-575-leadership-event
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="/images/avatar/5.jpg" class="img-fluid speakers-image" alt="">
 
-                                        <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">Izul</h5>
-
-                                            <p class="speakers-text mb-0">Top Level Speaker</p>
-
-                                            <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="/images/avatar/6.jpg" class="img-fluid speakers-image" alt="">
-
-                                        <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">ROPI</h5>
-
-                                            <p class="speakers-text mb-0">support</p>
-
-                                            <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="/images/avatar/7.jpg" class="img-fluid speakers-image" alt="">
-
-                                        <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">SULTHON</h5>
-
-                                            <p class="speakers-text mb-0">Top Level Speaker</p>
-
-                                            <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -351,15 +301,15 @@ https://templatemo.com/tm-575-leadership-event
                                 <h2>Hubungi Kami</h2>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-12">                                    
+                                    <div class="col-lg-4 col-md-4 col-12">
                                         <input type="text" name="name" id="name" class="form-control" placeholder="Name" required="">
                                     </div>
 
-                                    <div class="col-lg-4 col-md-4 col-12">         
+                                    <div class="col-lg-4 col-md-4 col-12">
                                         <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email" required="">
                                     </div>
 
-                                    <div class="col-lg-4 col-md-4 col-12">                                    
+                                    <div class="col-lg-4 col-md-4 col-12">
                                         <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject">
                                     </div>
 
@@ -414,14 +364,14 @@ https://templatemo.com/tm-575-leadership-event
                         </ul>
                     </div>
 
-                        
+
                     <div class="col-lg-5 col-12 ms-lg-auto">
                         <div class="copyright-text-wrap d-flex align-items-center">
-                            <p class="copyright-text ms-lg-auto me-4 mb-0">Copyright © 2025 Magang Sidang System Co., Ltd. 
-                            
-                            <br>All Rights Reserved. 
-          
-          					
+                            <p class="copyright-text ms-lg-auto me-4 mb-0">Copyright © 2025 Magang Sidang System Co., Ltd.
+
+                            <br>All Rights Reserved.
+
+
                             <a href="#section_1" class="bi-arrow-up arrow-icon custom-link"></a>
                         </div>
                     </div>
