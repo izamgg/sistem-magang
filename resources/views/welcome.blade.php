@@ -236,7 +236,7 @@ https://templatemo.com/tm-575-leadership-event
                                         <div class="speakers-info">
                                             <h5 class="speakers-title mb-0">Echa</h5>
 
-                                            <p class="speakers-text mb-0">TANK</p>
+                                            <p class="speakers-text mb-0">Support</p>
 
                                             <ul class="social-icon">
                                                 <li><a href="#" class="social-icon-link bi-facebook"></a></li>
@@ -270,7 +270,7 @@ https://templatemo.com/tm-575-leadership-event
                                         <img src="/images/avatar/4.jpg" class="img-fluid speakers-image" alt="">
 
                                         <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">Awi</h5>
+                                            <h5 class="speakers-title mb-0">Ari</h5>
 
                                             <p class="speakers-text mb-0">EXP</p>
 
