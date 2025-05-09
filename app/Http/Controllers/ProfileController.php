@@ -33,7 +33,7 @@ class ProfileController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'password' => 'nullable|min:6',
-            'photo' => 'nullable|max:5120'
+            'photo' => 'nullable|image|max:5120'
         ]);
 
         // Cari user berdasarkan ID

@@ -13,6 +13,7 @@
             <div class="row">
               <div class="col-md-4 h-100">
                 <img
+              
                   src="{{ Auth::user()->photo !== 'avatar.webp' ? asset('storage/' . Auth::user()->photo) : asset('avatar.webp') }}"
                   class="w-100" alt="">
               </div>

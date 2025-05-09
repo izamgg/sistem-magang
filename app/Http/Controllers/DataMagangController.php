@@ -130,17 +130,29 @@ class DataMagangController extends Controller
     }
 
     public function update_tempat_magang(string $id, Request $request)
-    {
-        $mhs = Mahasiswa::find($id);
-        $mhs->update([
-            'tempat_magang' => $request->tempat_magang,
-            'lokasi_magang' => $request->lokasi_magang,
-            'awal_magang' => $request->awal_magang,
-            'akhir_magang' => $request->akhir_magang,
-        ]);
+{
+    $user = Auth::user();
+    $mhs = Mahasiswa::findOrFail($id);
 
-        return redirect()->back();
+    // Batasi akses: hanya admin atau mahasiswa pemilik
+    if ($user->role !== 'dosen' && $mhs->user_id !== $user->id) {
+        abort(403, 'Anda tidak memiliki izin untuk mengedit data ini.');
     }
+
+    // Validasi input
+    $validated = $request->validate([
+        'tempat_magang' => 'required|string|max:255',
+        'lokasi_magang' => 'required|string|max:255',
+        'awal_magang' => 'required|date',
+        'akhir_magang' => 'required|date|after_or_equal:awal_magang',
+    ]);
+
+    // Update data
+    $mhs->update($validated);
+
+    return redirect()->back()->with('success', 'Data tempat magang berhasil diperbarui.');
+}
+
 
     public function edit(string $id, Request $request)
     {

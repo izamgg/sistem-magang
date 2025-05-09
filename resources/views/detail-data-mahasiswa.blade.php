@@ -67,7 +67,16 @@
                       {{ $statusKelulusan == 'Tidak Lulus' ? 'bg-danger' : '' }}">
                       {{ $statusKelulusan }}
                   </span>
-              </div>
+                </div>
+
+                {{-- <div class="mb-3">
+                  <label class="fw-bold d-block">Status Magang</label>
+                  <span class="badge 
+                      {{ $statusKelulusan == 'Lulus' ? 'bg-success' : '' }}
+                      {{ $statusKelulusan == 'Tidak Lulus' ? 'bg-danger' : '' }}">
+                      {{ $statusKelulusan }}
+                  </span>
+                </div> --}}
               
               
               

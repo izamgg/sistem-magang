@@ -187,14 +187,35 @@
 
 
                                         <div class="mb-3">
-                                          <Label class="fw-bold d-block">Status</Label>
+                                          <Label class="fw-bold d-block">Status Sidang </Label>
                                           <span
                                               class="badge 
                                                   {{ $statusKelulusan == 'Lulus' ? 'bg-success' : '' }}
                                                   {{ $statusKelulusan == 'Tidak Lulus' ? 'bg-danger' : '' }}">
                                               {{ $statusKelulusan }}
                                           </span>
-                                      </div>
+                                        </div>
+
+
+                                        {{-- <form method="POST" action="{{ route('upload-laporan', $dataMhs->id) }}" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="laporan_magang" class="form-label">Upload Laporan Magang (PDF)</label>
+                                                <input type="file" class="form-control" name="laporan_magang" accept=".pdf" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        </form>
+                                        
+                                        @if ($dataMhs->laporan_magang)
+                                            <p class="mt-2">Laporan saat ini: 
+                                                <a href="{{ asset('storage/laporan/' . $dataMhs->laporan_magang) }}" target="_blank">
+                                                    {{ $dataMhs->laporan_magang }}
+                                                </a>
+                                            </p>
+                                        @endif --}}
+                                        
+
+
                                       
                                       <div class="mb-3">
                                           <Label class="fw-bold">Nilai Rata-Rata</Label>
@@ -224,46 +245,84 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h2 class="mb-4 text-center fw-bold">Data Magang</h2>
-                                        <form action="" method="POST">
+                            
+                                        @if(Auth::user()->id == $dataMhs->user_id || Auth::user()->role == 'dosen')
+                                            @if(session('success'))
+                                                <div class="alert alert-success">
+                                                    {{ session('success') }}
+                                                </div>
+                                            @endif
+                            
+                                            <form action="{{ route('update-tempat-magang', $dataMhs->id) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                            
+                                                <div class="form-group">
+                                                    <label for="tempat_magang">Tempat Magang</label>
+                                                    <input type="text" class="form-control" name="tempat_magang" id="tempat_magang"
+                                                           value="{{ old('tempat_magang', $dataMhs->tempat_magang) }}">
+                                                    @error('tempat_magang')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                            
+                                                <div class="form-group">
+                                                    <label for="lokasi_magang">Lokasi Magang</label>
+                                                    <input type="text" class="form-control" name="lokasi_magang" id="lokasi_magang"
+                                                           value="{{ old('lokasi_magang', $dataMhs->lokasi_magang) }}">
+                                                    @error('lokasi_magang')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                            
+                                                <div class="form-group">
+                                                    <label for="awal_magang">Awal Magang</label>
+                                                    <input type="date" class="form-control" name="awal_magang" id="awal_magang"
+                                                           value="{{ old('awal_magang', $dataMhs->awal_magang) }}">
+                                                    @error('awal_magang')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                            
+                                                <div class="form-group">
+                                                    <label for="akhir_magang">Akhir Magang</label>
+                                                    <input type="date" class="form-control" name="akhir_magang" id="akhir_magang"
+                                                           value="{{ old('akhir_magang', $dataMhs->akhir_magang) }}">
+                                                    @error('akhir_magang')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                            
+                                                <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                                            </form>
+                                        @else
+                                            {{-- Jika bukan mahasiswa atau dosen, hanya tampilkan data readonly --}}
                                             <div class="form-group">
-                                                <label for="tmp_magang">Tempat Magang</label>
-                                                <input type="text" class="form-control" name="dospem"
-                                                    id="tmp_magang" value="{{ $dataMhs->tempat_magang }}" readonly>
-                                                @error('dospem')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                                <label>Tempat Magang</label>
+                                                <input type="text" class="form-control" value="{{ $dataMhs->tempat_magang }}" readonly>
                                             </div>
-
+                            
                                             <div class="form-group">
-                                                <label for="tmp_magang">Lokasi Magang</label>
-                                                <input type="text" class="form-control" name="dospem"
-                                                    id="tmp_magang" value="{{ $dataMhs->lokasi_magang }}" readonly>
-                                                @error('dospem')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                                <label>Lokasi Magang</label>
+                                                <input type="text" class="form-control" value="{{ $dataMhs->lokasi_magang }}" readonly>
                                             </div>
-
+                            
                                             <div class="form-group">
-                                                <label for="tmp_magang">Awal Magang</label>
-                                                <input type="text" class="form-control" name="dospem"
-                                                    id="tmp_magang" value="{{ $dataMhs->awal_magang }}" readonly>
-                                                @error('dospem')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                                <label>Awal Magang</label>
+                                                <input type="text" class="form-control" value="{{ $dataMhs->awal_magang }}" readonly>
                                             </div>
-
+                            
                                             <div class="form-group">
-                                                <label for="tmp_magang">Akhir Magang</label>
-                                                <input type="text" class="form-control" name="dospem"
-                                                    id="tmp_magang" value="{{ $dataMhs->akhir_magang }}" readonly>
-                                                @error('dospem')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                                <label>Akhir Magang</label>
+                                                <input type="text" class="form-control" value="{{ $dataMhs->akhir_magang }}" readonly>
                                             </div>
-                                        </form>
+                                        @endif
+                            
                                     </div>
                                 </div>
                             </div>
+                            
+                            
 
 
                             <div class="col-md-12">
