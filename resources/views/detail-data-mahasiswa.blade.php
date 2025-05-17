@@ -68,7 +68,7 @@
                                         {{ $statusKelulusan }}
                                     </span>
                                 </div>
-                                {{-- perubahan dikit --}}
+                               
                                 <div class="mb-3">
                                     <label class="fw-bold d-block">Status Magang</label>
                                     @if (Auth::user()->role === 'admin' || Auth::user()->role === 'dosen_penguji')
