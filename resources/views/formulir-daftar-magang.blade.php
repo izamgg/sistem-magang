@@ -187,40 +187,29 @@
 
 
                                         <div class="mb-3">
-                                          <Label class="fw-bold d-block">Status Sidang </Label>
-                                          <span
-                                              class="badge 
+                                            <Label class="fw-bold d-block">Status Sidang </Label>
+                                            <span
+                                                class="badge 
                                                   {{ $statusKelulusan == 'Lulus' ? 'bg-success' : '' }}
                                                   {{ $statusKelulusan == 'Tidak Lulus' ? 'bg-danger' : '' }}">
-                                              {{ $statusKelulusan }}
-                                          </span>
+                                                {{ $statusKelulusan }}
+                                            </span>
                                         </div>
-
-
-                                        {{-- <form method="POST" action="{{ route('upload-laporan', $dataMhs->id) }}" enctype="multipart/form-data">
-                                            @csrf
+                                        {{-- perubahan --}}
+                                        @if (isset($dataMhs->status_kelulusan))
                                             <div class="mb-3">
-                                                <label for="laporan_magang" class="form-label">Upload Laporan Magang (PDF)</label>
-                                                <input type="file" class="form-control" name="laporan_magang" accept=".pdf" required>
+                                                <label class="fw-bold d-block">Status Magang</label>
+                                                <span
+                                                    class="badge {{ $dataMhs->status_kelulusan == 'Lulus' ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $dataMhs->status_kelulusan }}
+                                                </span>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Upload</button>
-                                        </form>
-                                        
-                                        @if ($dataMhs->laporan_magang)
-                                            <p class="mt-2">Laporan saat ini: 
-                                                <a href="{{ asset('storage/laporan/' . $dataMhs->laporan_magang) }}" target="_blank">
-                                                    {{ $dataMhs->laporan_magang }}
-                                                </a>
-                                            </p>
-                                        @endif --}}
-                                        
-
-
-                                      
-                                      <div class="mb-3">
-                                          <Label class="fw-bold">Nilai Rata-Rata</Label>
-                                          <p>{{ $nilaiAkhir }}</p>
-                                      </div>
+                                        @endif
+                                        {{-- dikit --}}
+                                        <div class="mb-3">
+                                            <Label class="fw-bold">Nilai Rata-Rata</Label>
+                                            <p>{{ $nilaiAkhir }}</p>
+                                        </div>
 
                                         <div class="mb-3">
                                             <a href="/data-magang/{{ $dataMhs->id }}" class="btn btn-primary">Edit Data
@@ -245,84 +234,93 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h2 class="mb-4 text-center fw-bold">Data Magang</h2>
-                            
-                                        @if(Auth::user()->id == $dataMhs->user_id || Auth::user()->role == 'dosen')
-                                            @if(session('success'))
+
+                                        @if (Auth::user()->id == $dataMhs->user_id || Auth::user()->role == 'dosen')
+                                            @if (session('success'))
                                                 <div class="alert alert-success">
                                                     {{ session('success') }}
                                                 </div>
                                             @endif
-                            
-                                            <form action="{{ route('update-tempat-magang', $dataMhs->id) }}" method="POST">
+
+                                            <form action="{{ route('update-tempat-magang', $dataMhs->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('PATCH')
-                            
+
                                                 <div class="form-group">
                                                     <label for="tempat_magang">Tempat Magang</label>
-                                                    <input type="text" class="form-control" name="tempat_magang" id="tempat_magang"
-                                                           value="{{ old('tempat_magang', $dataMhs->tempat_magang) }}">
+                                                    <input type="text" class="form-control" name="tempat_magang"
+                                                        id="tempat_magang"
+                                                        value="{{ old('tempat_magang', $dataMhs->tempat_magang) }}">
                                                     @error('tempat_magang')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
-                            
+
                                                 <div class="form-group">
                                                     <label for="lokasi_magang">Lokasi Magang</label>
-                                                    <input type="text" class="form-control" name="lokasi_magang" id="lokasi_magang"
-                                                           value="{{ old('lokasi_magang', $dataMhs->lokasi_magang) }}">
+                                                    <input type="text" class="form-control" name="lokasi_magang"
+                                                        id="lokasi_magang"
+                                                        value="{{ old('lokasi_magang', $dataMhs->lokasi_magang) }}">
                                                     @error('lokasi_magang')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
-                            
+
                                                 <div class="form-group">
                                                     <label for="awal_magang">Awal Magang</label>
-                                                    <input type="date" class="form-control" name="awal_magang" id="awal_magang"
-                                                           value="{{ old('awal_magang', $dataMhs->awal_magang) }}">
+                                                    <input type="date" class="form-control" name="awal_magang"
+                                                        id="awal_magang"
+                                                        value="{{ old('awal_magang', $dataMhs->awal_magang) }}">
                                                     @error('awal_magang')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
-                            
+
                                                 <div class="form-group">
                                                     <label for="akhir_magang">Akhir Magang</label>
-                                                    <input type="date" class="form-control" name="akhir_magang" id="akhir_magang"
-                                                           value="{{ old('akhir_magang', $dataMhs->akhir_magang) }}">
+                                                    <input type="date" class="form-control" name="akhir_magang"
+                                                        id="akhir_magang"
+                                                        value="{{ old('akhir_magang', $dataMhs->akhir_magang) }}">
                                                     @error('akhir_magang')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
-                            
+
                                                 <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                                             </form>
                                         @else
                                             {{-- Jika bukan mahasiswa atau dosen, hanya tampilkan data readonly --}}
                                             <div class="form-group">
                                                 <label>Tempat Magang</label>
-                                                <input type="text" class="form-control" value="{{ $dataMhs->tempat_magang }}" readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $dataMhs->tempat_magang }}" readonly>
                                             </div>
-                            
+
                                             <div class="form-group">
                                                 <label>Lokasi Magang</label>
-                                                <input type="text" class="form-control" value="{{ $dataMhs->lokasi_magang }}" readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $dataMhs->lokasi_magang }}" readonly>
                                             </div>
-                            
+
                                             <div class="form-group">
                                                 <label>Awal Magang</label>
-                                                <input type="text" class="form-control" value="{{ $dataMhs->awal_magang }}" readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $dataMhs->awal_magang }}" readonly>
                                             </div>
-                            
+
                                             <div class="form-group">
                                                 <label>Akhir Magang</label>
-                                                <input type="text" class="form-control" value="{{ $dataMhs->akhir_magang }}" readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $dataMhs->akhir_magang }}" readonly>
                                             </div>
                                         @endif
-                            
+
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
 
 
                             <div class="col-md-12">

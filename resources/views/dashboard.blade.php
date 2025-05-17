@@ -58,7 +58,7 @@
                     </div>
                   </div>
                   <div class="col-md-8">
-                    <h6 class="text-muted">Mahasiswa Lulus</h6>
+                    <h6 class="text-muted">Mahasiswa Lulus Sidang</h6>
                     <h6 class="mb-0">{{ $jumlahLulus }}</h6>
                   </div>
                 </div>
@@ -77,7 +77,7 @@
                     </div>
                   </div>
                   <div class="col-md-8">
-                    <h6 class="text-muted">Mahasiswa Tidak Lulus</h6>
+                    <h6 class="text-muted">Mahasiswa Tidak Lulus Sidang</h6>
                     <h6 class="mb-0">{{ $jumlahTidakLulus }}</h6>
                   </div>
                 </div>

@@ -26,7 +26,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/data-magang/{id}', [DataMagangController::class, 'edit'])->name('data-magang.edit-data-diri');
     Route::patch('/data-magang/{id}', [DataMagangController::class, 'update'])->name('data-magang.update-data-diri');
-
+    // perubahan
+    Route::put('/tentukan-kelulusan/{id}', [DataMagangController::class, 'tentukanKelulusan'])->name('tentukan-kelulusan');
+// dikit
 
     Route::patch('/data-tempat-magang/{id}/update', [DataMagangController::class, 'update_tempat_magang'])->name('update-tempat-magang');
     Route::patch('/data-penjadwalan/{id}/update', [SidangController::class, 'update_penjadwalan'])->name('update-penjadwalan');

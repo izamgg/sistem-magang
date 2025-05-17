@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('akhir_magang')->nullable();
             $table->string('dospem')->nullable();
             $table->enum('status', [0, 1, 2])->default(0);
+            
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

@@ -19,32 +19,32 @@ class DataMagangController extends Controller
             $dataDosen = User::where('role', 'dosen')->get();
             $dataJadwal = Jadwal::where('mahasiswa_id', Auth::user()->mahasiswa->jadwal->mahasiswa_id ?? '')->first();
             $dataNilai = Nilai::where('mahasiswa_id', Auth::user()->mahasiswa->nilai->mahasiswa_id ?? '')->first();
-    
+
             // Ambil nilai dari dosen penguji dan dosen pembimbing
             $dospeng1 = $dataNilai->dospeng_1_nilai ?? 0;
             $dospeng2 = $dataNilai->dospeng_2_nilai ?? 0;
             $dospeng3 = $dataNilai->dospeng_3_nilai ?? 0;
             $dospem = $dataNilai->dospem_nilai ?? 0;
-    
+
             // Hitung rata-rata dosen penguji (bagi 3)
             $rataDospeng = ($dospeng1 + $dospeng2 + $dospeng3) / 3;
-    
+
             // Hitung nilai akhir (rata dospeng + dospem) / 2
             $nilaiAkhir = ($rataDospeng + $dospem) / 2;
-    
+
             // Evaluasi status kelulusan
             $statusKelulusan = $nilaiAkhir >= 70 ? 'Lulus' : 'Tidak Lulus';
-    
+
             return view('formulir-daftar-magang', [
                 'dataMhs' => $dataMhs,
                 'dataDosen' => $dataDosen,
                 'dataJadwal' => $dataJadwal,
                 'dataNilai' => $dataNilai,
                 'nilaiAkhir' => $nilaiAkhir,
-                'statusKelulusan' => $statusKelulusan
+                'statusKelulusan' => $statusKelulusan,
             ]);
         }
-    
+
         if (Auth::user()->role == 'dosen' || Auth::user()->role == 'dosen_penguji' || Auth::user()->role == 'admin') {
             $dataMhs = Mahasiswa::all();
             return view('data-magang', [
@@ -86,12 +86,7 @@ class DataMagangController extends Controller
         $dataJadwal = Jadwal::where('mahasiswa_id', $id)->first();
         $dataNilai = Nilai::where('mahasiswa_id', $id)->first();
 
-        $nilaiComponents = [
-            $dataNilai->dospem_nilai ?? 0,
-            $dataNilai->dospeng_1_nilai ?? 0,
-            $dataNilai->dospeng_2_nilai ?? 0,
-            $dataNilai->dospeng_3_nilai ?? 0
-        ];
+        $nilaiComponents = [$dataNilai->dospem_nilai ?? 0, $dataNilai->dospeng_1_nilai ?? 0, $dataNilai->dospeng_2_nilai ?? 0, $dataNilai->dospeng_3_nilai ?? 0];
 
         $totalNilai = array_sum($nilaiComponents);
         $jumlahNilai = count(array_filter($nilaiComponents, fn($nilai) => $nilai > 0));
@@ -102,16 +97,15 @@ class DataMagangController extends Controller
             $dataMhs->update(['status' => '2']); // lulus
         }
 
-
         if ($rataRataNilai < 70 && $rataRataNilai > 0) {
             $dataMhs->update(['status' => '1']); // tidak lulus
         }
-         
-            // Ambil nilai dari dosen penguji dan dosen pembimbing
-            $dospeng1 = $dataNilai->dospeng_1_nilai ?? 0;
-            $dospeng2 = $dataNilai->dospeng_2_nilai ?? 0;
-            $dospeng3 = $dataNilai->dospeng_3_nilai ?? 0;
-            $dospem = $dataNilai->dospem_nilai ?? 0;
+
+        // Ambil nilai dari dosen penguji dan dosen pembimbing
+        $dospeng1 = $dataNilai->dospeng_1_nilai ?? 0;
+        $dospeng2 = $dataNilai->dospeng_2_nilai ?? 0;
+        $dospeng3 = $dataNilai->dospeng_3_nilai ?? 0;
+        $dospem = $dataNilai->dospem_nilai ?? 0;
 
         $rataDospeng = ($dospeng1 + $dospeng2 + $dospeng3) / 3;
 
@@ -125,34 +119,33 @@ class DataMagangController extends Controller
             'dataNilai' => $dataNilai,
             'nilaiRataRata' => $rataRataNilai,
             'nilaiAkhir' => $nilaiAkhir,
-            'statusKelulusan' => $statusKelulusan
+            'statusKelulusan' => $statusKelulusan,
         ]);
     }
 
     public function update_tempat_magang(string $id, Request $request)
-{
-    $user = Auth::user();
-    $mhs = Mahasiswa::findOrFail($id);
+    {
+        $user = Auth::user();
+        $mhs = Mahasiswa::findOrFail($id);
 
-    // Batasi akses: hanya admin atau mahasiswa pemilik
-    if ($user->role !== 'dosen' && $mhs->user_id !== $user->id) {
-        abort(403, 'Anda tidak memiliki izin untuk mengedit data ini.');
+        // Batasi akses: hanya admin atau mahasiswa pemilik
+        if ($user->role !== 'dosen' && $mhs->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengedit data ini.');
+        }
+
+        // Validasi input
+        $validated = $request->validate([
+            'tempat_magang' => 'required|string|max:255',
+            'lokasi_magang' => 'required|string|max:255',
+            'awal_magang' => 'required|date',
+            'akhir_magang' => 'required|date|after_or_equal:awal_magang',
+        ]);
+
+        // Update data
+        $mhs->update($validated);
+
+        return redirect()->back()->with('success', 'Data tempat magang berhasil diperbarui.');
     }
-
-    // Validasi input
-    $validated = $request->validate([
-        'tempat_magang' => 'required|string|max:255',
-        'lokasi_magang' => 'required|string|max:255',
-        'awal_magang' => 'required|date',
-        'akhir_magang' => 'required|date|after_or_equal:awal_magang',
-    ]);
-
-    // Update data
-    $mhs->update($validated);
-
-    return redirect()->back()->with('success', 'Data tempat magang berhasil diperbarui.');
-}
-
 
     public function edit(string $id, Request $request)
     {
@@ -181,4 +174,28 @@ class DataMagangController extends Controller
         ]);
         return redirect('data-magang');
     }
+//    perubahan
+   public function tentukanKelulusan(Request $request, $id)
+{
+    $mhs = Mahasiswa::findOrFail($id);
+
+    // Hanya dosen pembimbing yang boleh menentukan
+    if (Auth::user()->role !== 'dosen' || Auth::user()->name !== $mhs->dospem) {
+        abort(403, 'Anda tidak memiliki izin.');
+    }
+
+    $status = $request->status_kelulusan;
+    if (!in_array($status, ['Lulus', 'Tidak Lulus'])) {
+        return back()->with('error', 'Status tidak valid');
+    }
+
+    $mhs->update([
+        'status_kelulusan' => $status
+    ]);
+
+    return back()->with('success', 'Status kelulusan berhasil ditentukan.');
 }
+// dikit
+
+}
+
