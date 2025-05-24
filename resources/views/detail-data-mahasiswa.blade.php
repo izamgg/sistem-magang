@@ -68,7 +68,7 @@
                                         {{ $statusKelulusan }}
                                     </span>
                                 </div>
-                               
+
                                 <div class="mb-3">
                                     <label class="fw-bold d-block">Status Magang</label>
                                     @if (Auth::user()->role === 'admin' || Auth::user()->role === 'dosen_penguji')
@@ -94,6 +94,30 @@
                                 </div>
 
                                 {{-- perubahan dikit --}}
+                                {{-- p2 --}}
+                                {{-- Laporan Magang --}}
+                                <div class="mb-3">
+                                    <label class="fw-bold d-block">Laporan Magang</label>
+
+                                    @if ($dataMhs->laporan_magang)
+                                        {{-- Tampilkan tombol unduh untuk semua role selain mahasiswa --}}
+                                        @if (!(Auth::user()->role === 'mahasiswa' && Auth::user()->id === $dataMhs->user_id))
+                                            <a href="{{ Storage::url($dataMhs->laporan_magang) }}"
+                                                class="btn btn-outline-primary" target="_blank" download>
+                                                <i class="bi bi-download"></i> Unduh Laporan
+                                            </a>
+                                        @else
+                                            {{-- Untuk mahasiswa sendiri, bisa juga di-link --}}
+                                            <a href="{{ Storage::url($dataMhs->laporan_magang) }}" class="btn btn-success"
+                                                target="_blank">
+                                                <i class="bi bi-file-earmark-pdf"></i> Lihat/Unduh Laporan
+                                            </a>
+                                        @endif
+                                    @else
+                                        <span class="text-muted">Belum ada laporan diunggah.</span>
+                                    @endif
+                                </div>
+                                {{-- p2 --}}
                                 <div class="mb-3">
                                     <Label class="fw-bold">Nilai Rata-Rata</Label>
                                     <p>{{ $nilaiAkhir }}</p>

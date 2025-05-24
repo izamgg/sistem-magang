@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Nilai;
 use App\Models\Jadwal;
 use App\Models\Mahasiswa;
-use App\Models\Nilai;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DataMagangController extends Controller
 {
@@ -174,28 +175,60 @@ class DataMagangController extends Controller
         ]);
         return redirect('data-magang');
     }
-//    perubahan
-   public function tentukanKelulusan(Request $request, $id)
-{
-    $mhs = Mahasiswa::findOrFail($id);
+    //    perubahan
+    public function tentukanKelulusan(Request $request, $id)
+    {
+        $mhs = Mahasiswa::findOrFail($id);
 
-    // Hanya dosen pembimbing yang boleh menentukan
-    if (Auth::user()->role !== 'dosen' || Auth::user()->name !== $mhs->dospem) {
-        abort(403, 'Anda tidak memiliki izin.');
+        // Hanya dosen pembimbing yang boleh menentukan
+        if (Auth::user()->role !== 'dosen' || Auth::user()->name !== $mhs->dospem) {
+            abort(403, 'Anda tidak memiliki izin.');
+        }
+
+        $status = $request->status_kelulusan;
+        if (!in_array($status, ['Lulus', 'Tidak Lulus'])) {
+            return back()->with('error', 'Status tidak valid');
+        }
+
+        $mhs->update([
+            'status_kelulusan' => $status,
+        ]);
+
+        return back()->with('success', 'Status kelulusan berhasil ditentukan.');
+    }
+    // dikit
+    // p2
+    public function uploadLaporan(Request $request, $id)
+    {
+        $request->validate([
+            'laporan_magang' => 'required|mimes:pdf|max:2048',
+        ]);
+
+        $mhs = Mahasiswa::findOrFail($id);
+
+        // Batasi agar hanya pemilik atau admin yang bisa upload
+        if (Auth::user()->id !== $mhs->user_id && Auth::user()->role !== 'admin') {
+            abort(403, 'Anda tidak memiliki izin.');
+        }
+
+        if ($request->hasFile('laporan_magang')) {
+            // Hapus file lama jika ada
+            if ($mhs->laporan_magang) {
+                Storage::disk('public')->delete($mhs->laporan_magang);
+            }
+
+            // Simpan file di folder 'public/laporan_magang'
+            $path = $request->file('laporan_magang')->store('laporan_magang', 'public');
+
+            $mhs->update([
+                'laporan_magang' => $path,
+            ]);
+
+            return back()->with('success', 'Laporan magang berhasil diupload.');
+        }
+
+        return back()->with('error', 'Gagal upload laporan.');
     }
 
-    $status = $request->status_kelulusan;
-    if (!in_array($status, ['Lulus', 'Tidak Lulus'])) {
-        return back()->with('error', 'Status tidak valid');
-    }
-
-    $mhs->update([
-        'status_kelulusan' => $status
-    ]);
-
-    return back()->with('success', 'Status kelulusan berhasil ditentukan.');
+    // p2
 }
-// dikit
-
-}
-

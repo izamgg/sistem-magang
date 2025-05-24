@@ -206,6 +206,15 @@
                                             </div>
                                         @endif
                                         {{-- dikit --}}
+                                        {{-- p2 --}}
+                                        <form action="{{ route('upload.laporan', $dataMhs->id) }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <label for="laporan_magang">Upload Laporan Magang (PDF)</label>
+                                            <input type="file" name="laporan_magang" accept=".pdf" required>
+                                            <button type="submit">Upload</button>
+                                        </form>
+                                        {{-- p2 --}}
                                         <div class="mb-3">
                                             <Label class="fw-bold">Nilai Rata-Rata</Label>
                                             <p>{{ $nilaiAkhir }}</p>
