@@ -92,10 +92,20 @@
                                         </form>
                                     @endif
                                 </div>
+                                {{-- perubahan --}}
+                                @if (isset($dataMhs->status_kelulusan))
+                                    <div class="mb-3">
+                                        <label class="fw-bold d-block">Status Magang</label>
+                                        <span
+                                            class="badge {{ $dataMhs->status_kelulusan == 'Lulus' ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $dataMhs->status_kelulusan }}
+                                        </span>
+                                    </div>
+                                @endif
+                                {{-- dikit --}}
 
                                 {{-- perubahan dikit --}}
                                 {{-- p2 --}}
-                                {{-- Laporan Magang --}}
                                 <div class="mb-3">
                                     <label class="fw-bold d-block">Laporan Magang</label>
 
@@ -128,207 +138,198 @@
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="col-md-6">
+                <!-- Form Edit Tempat Magang -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="mb-4 text-center fw-bold">Form Edit Tempat Magang</h2>
+                        <form action="{{ route('update-tempat-magang', ['id' => $dataMhs->id]) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <div class="form-group">
+                                <label for="tmp_magang">Tempat Magang</label>
+                                <input type="text" class="form-control" name="tempat_magang" id="tmp_magang"
+                                    value="{{ $dataMhs->tempat_magang }}">
+                                @error('tempat_magang')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lokasi_magang">Lokasi Magang</label>
+                                <input type="text" class="form-control" name="lokasi_magang" id="lokasi_magang"
+                                    value="{{ $dataMhs->lokasi_magang }}">
+                                @error('lokasi_magang')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="awal_magang">Awal Magang</label>
+                                <input type="date" class="form-control" name="awal_magang" id="awal_magang"
+                                    value="{{ $dataMhs->awal_magang }}">
+                                @error('awal_magang')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="akhir_magang">Akhir Magang</label>
+                                <input type="date" class="form-control" name="akhir_magang" id="akhir_magang"
+                                    value="{{ $dataMhs->akhir_magang }}">
+                                @error('akhir_magang')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Penilaian Sidang -->
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="mb-4 text-center fw-bold">Penilaian Sidang</h2>
+                        <form action="{{ route('update_nilai', ['id' => $dataMhs->id]) }}" method="POST">
+                            @php
+                                $isDisabled =
+                                    $dataNilai->dospeng_1_nama === Auth::user()->name ||
+                                    $dataNilai->dospeng_2_nama === Auth::user()->name ||
+                                    $dataNilai->dospeng_3_nama === Auth::user()->name;
+                            @endphp
+                            @csrf
+                            @method('PUT')
+
+                            <div class="form-group">
+                                <label for="dospem_nilai">Nilai Dosen Pembimbing</label>
+                                <input type="hidden" name="dospem_nama" value="{{ Auth::user()->name }}"
+                                    {{ Auth::user()->role !== 'dosen' ? 'disabled' : '' }}>
+                                <input type="number" class="form-control" name="dospem_nilai" id="dospem_nilai"
+                                    value="{{ $dataNilai->dospem_nilai }}"
+                                    {{ Auth::user()->role !== 'dosen' ? 'disabled' : '' }}>
+                                @error('dospem')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dospeng_1_nilai">Nilai Dosen Penguji 1</label>
+                                <input type="hidden" name="dospeng_1_nama" value="{{ Auth::user()->name }}"
+                                    {{ $isDisabled || !is_null($dataNilai->dospeng_1_nama) ? 'disabled' : '' }}
+                                    {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
+                                <input type="number" class="form-control" name="dospeng_1_nilai" id="dospeng_1_nilai"
+                                    value="{{ $dataNilai->dospeng_1_nilai }}"
+                                    {{ $isDisabled || !is_null($dataNilai->dospeng_1_nilai) ? 'disabled' : '' }}
+                                    {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
+                                @error('dospeng_1')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dospeng_2_nilai">Nilai Dosen Penguji 2</label>
+                                <input type="hidden" name="dospeng_2_nama" value="{{ Auth::user()->name }}"
+                                    {{ $isDisabled || !is_null($dataNilai->dospeng_2_nama) ? 'disabled' : '' }}
+                                    {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
+                                <input type="number" class="form-control" name="dospeng_2_nilai" id="dospeng_2_nilai"
+                                    value="{{ $dataNilai->dospeng_2_nilai }}"
+                                    {{ $isDisabled || !is_null($dataNilai->dospeng_2_nilai) ? 'disabled' : '' }}
+                                    {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
+                                @error('dospeng_2')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dospeng_3_nilai">Nilai Dosen Penguji 3</label>
+                                <input type="hidden" name="dospeng_3_nama" value="{{ Auth::user()->name }}"
+                                    {{ $isDisabled || !is_null($dataNilai->dospeng_3_nama) ? 'disabled' : '' }}
+                                    {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
+                                <input type="number" class="form-control" name="dospeng_3_nilai" id="dospeng_3_nilai"
+                                    value="{{ $dataNilai->dospeng_3_nilai }}"
+                                    {{ $isDisabled || !is_null($dataNilai->dospeng_3_nilai) ? 'disabled' : '' }}
+                                    {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
+                                @error('dospeng_3')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
 
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="mb-4 text-center fw-bold">Form Edit Tempat Magang</h2>
-                            <form action="{{ route('update-tempat-magang', ['id' => $dataMhs->id]) }}" method="POST">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h2 class="mb-4 text-center fw-bold">Penjadwalan Sidang</h2>
+
+                        @if (Auth::user()->role === 'admin')
+                            {{-- ADMIN BISA EDIT --}}
+                            <form action="{{ route('update-penjadwalan', ['id' => $dataMhs->id]) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
+
                                 <div class="form-group">
-                                    <label for="tmp_magang">Tempat Magang</label>
-                                    <input type="text" class="form-control" name="tempat_magang" id="tmp_magang"
-                                        value="{{ $dataMhs->tempat_magang }}">
-                                    @error('tempat_magang')
+                                    <label for="tempat">Tempat</label>
+                                    <input type="text" class="form-control" name="tempat" id="tempat"
+                                        value="{{ $dataJadwal->tempat }}">
+                                    @error('tempat')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="lokasi_magang">Lokasi Magang</label>
-                                    <input type="text" class="form-control" name="lokasi_magang" id="lokasi_magang"
-                                        value="{{ $dataMhs->lokasi_magang }}">
-                                    @error('lokasi_magang')
+                                    <label for="tanggal">Tanggal</label>
+                                    <input type="date" class="form-control" name="tanggal" id="tanggal"
+                                        value="{{ $dataJadwal->tanggal }}">
+                                    @error('tanggal')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="lokasi_magang">Awal Magang</label>
-                                    <input type="date" class="form-control" name="awal_magang" id="lokasi_magang"
-                                        value="{{ $dataMhs->awal_magang }}">
-                                    @error('awal_magang')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="lokasi_magang">Akhir Magang</label>
-                                    <input type="date" class="form-control" name="akhir_magang" id="lokasi_magang"
-                                        value="{{ $dataMhs->akhir_magang }}">
-                                    @error('akhir_magang')
+                                    <label for="jam">Jam</label>
+                                    <input type="time" class="form-control" name="jam" id="jam"
+                                        value="{{ $dataJadwal->jam }}">
+                                    @error('jam')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
                                 <button class="btn btn-primary" type="submit">Simpan</button>
                             </form>
-                        </div>
+                        @else
+                            {{-- ROLE LAIN HANYA LIHAT --}}
+                            <div class="form-group">
+                                <label>Tempat</label>
+                                <input type="text" class="form-control" value="{{ $dataJadwal->tempat ?? '-' }}"
+                                    readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control" value="{{ $dataJadwal->tanggal ?? '-' }}"
+                                    readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Jam</label>
+                                <input type="text" class="form-control" value="{{ $dataJadwal->jam ?? '-' }}"
+                                    readonly>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="mb-4 text-center fw-bold">Penilaian Sidang</h2>
-                            <form action="{{ route('update_nilai', ['id' => $dataMhs->id]) }}" method="POST">
-                                @php
-                                    // Cek apakah user sudah memberikan nilai sebelumnya
-                                    $isDisabled =
-                                        $dataNilai->dospeng_1_nama === Auth::user()->name ||
-                                        $dataNilai->dospeng_2_nama === Auth::user()->name ||
-                                        $dataNilai->dospeng_3_nama === Auth::user()->name;
-                                @endphp
-
-                                @csrf
-                                @method('PUT')
-                                <div class="form-group">
-                                    <label for="tmp_magang">Nilai Dosen Pembimbing</label>
-                                    <input type="hidden" class="form-control" name="dospem_nama" id="tmp_magang"
-                                        value="{{ Auth::user()->name }}"
-                                        {{ Auth::user()->role !== 'dosen' ? 'disabled' : '' }}>
-                                    <input type="number" class="form-control" name="dospem_nilai" id="tmp_magang"
-                                        value="{{ $dataNilai->dospem_nilai }}"
-                                        {{ Auth::user()->role !== 'dosen' ? 'disabled' : '' }}>
-                                    @error('dospem')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="lokasi_magang">Nilai Dosen Penguji 1</label>
-                                    <input type="hidden" class="form-control" name="dospeng_1_nama" id="tmp_magang"
-                                        value="{{ Auth::user()->name }}"
-                                        {{ $isDisabled || !is_null($dataNilai->dospeng_1_nama) ? 'disabled' : '' }}
-                                        {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
-                                    <input type="number" class="form-control" name="dospeng_1_nilai" id="lokasi_magang"
-                                        value="{{ $dataNilai->dospeng_1_nilai }}"
-                                        {{ $isDisabled || !is_null($dataNilai->dospeng_1_nilai) ? 'disabled' : '' }}
-                                        {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
-                                    @error('dospeng_1')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="lokasi_magang">Nilai Dosen Penguji 2</label>
-
-                                    <input type="hidden" class="form-control" name="dospeng_2_nama" id="tmp_magang"
-                                        value="{{ Auth::user()->name }}"
-                                        {{ $isDisabled || !is_null($dataNilai->dospeng_2_nama) ? 'disabled' : '' }}
-                                        {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
-                                    <input type="number" class="form-control" name="dospeng_2_nilai" id="lokasi_magang"
-                                        value="{{ $dataNilai->dospeng_2_nilai }}"
-                                        {{ $isDisabled || !is_null($dataNilai->dospeng_2_nilai) ? 'disabled' : '' }}
-                                        {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
-                                    @error('dospeng_2')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="lokasi_magang">Nilai Dosen Penguji 3</label>
-                                    <input type="hidden" class="form-control" name="dospeng_3_nama" id="tmp_magang"
-                                        value="{{ Auth::user()->name }}"
-                                        {{ $isDisabled || !is_null($dataNilai->dospeng_3_nama) ? 'disabled' : '' }}
-                                        {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
-                                    <input type="number" class="form-control" name="dospeng_3_nilai" id="lokasi_magang"
-                                        value="{{ $dataNilai->dospeng_3_nilai }}"
-                                        {{ $isDisabled || !is_null($dataNilai->dospeng_3_nilai) ? 'disabled' : '' }}
-                                        {{ Auth::user()->role === 'dosen' ? 'disabled' : '' }}>
-                                    @error('dospeng_3')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <button class="btn btn-primary" type="submit">Simpan</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="mb-4 text-center fw-bold">Penjadwalan Sidang</h2>
-
-                            @if (Auth::user()->role === 'admin')
-                                {{-- ADMIN BISA EDIT --}}
-                                <form action="{{ route('update-penjadwalan', ['id' => $dataMhs->id]) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-
-                                    <div class="form-group">
-                                        <label for="tempat">Tempat</label>
-                                        <input type="text" class="form-control" name="tempat" id="tempat"
-                                            value="{{ $dataJadwal->tempat }}">
-                                        @error('tempat')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="tanggal">Tanggal</label>
-                                        <input type="date" class="form-control" name="tanggal" id="tanggal"
-                                            value="{{ $dataJadwal->tanggal }}">
-                                        @error('tanggal')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="jam">Jam</label>
-                                        <input type="time" class="form-control" name="jam" id="jam"
-                                            value="{{ $dataJadwal->jam }}">
-                                        @error('jam')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-
-                                    <button class="btn btn-primary" type="submit">Simpan</button>
-                                </form>
-                            @else
-                                {{-- ROLE LAIN HANYA LIHAT --}}
-                                <div class="form-group">
-                                    <label>Tempat</label>
-                                    <input type="text" class="form-control" value="{{ $dataJadwal->tempat ?? '-' }}"
-                                        readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Tanggal</label>
-                                    <input type="text" class="form-control" value="{{ $dataJadwal->tanggal ?? '-' }}"
-                                        readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Jam</label>
-                                    <input type="text" class="form-control" value="{{ $dataJadwal->jam ?? '-' }}"
-                                        readonly>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </div>
+
         </div>
     </section>
 @endsection
